@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export default function MessageDisplay({ messages, isTyping, chatEndRef, copiedId, handleCopy }) {
   return (
@@ -15,10 +16,10 @@ export default function MessageDisplay({ messages, isTyping, chatEndRef, copiedI
                 {msg.text}
               </div>
             ) : (
-              /* AI Legal response (Plain Text on the Left) */
+              /* AI Legal response with Markdown rendering */
               <div className="w-full flex flex-col items-start bg-[#0d0d0d] p-5 border border-zinc-850 rounded-2xl">
-                <div className="text-[#ececec] text-xs md:text-sm leading-relaxed whitespace-pre-wrap select-text font-normal max-w-full break-words">
-                  {msg.text}
+                <div className="ai-markdown-response text-[#ececec] text-xs md:text-sm leading-relaxed select-text font-normal max-w-full break-words">
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
                 </div>
                 
                 {/* Response actions toolbar */}

@@ -19,11 +19,26 @@ connectDB();
 
 const app = express();
 
-// Standard middlewares
+// Trust proxy when deployed behind reverse proxies (Render, Railway, etc.)
+app.set('trust proxy', 1);
+
+// CORS configuration — restrict to frontend URL in production
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: '*', // Allows broad connection for development and testing
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -41,8 +56,9 @@ app.use('/api/analyze', analyzeRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'AI Advocate Secure legal terminal backend is active and operational.',
+    message: 'AI Advocate backend is active and operational.',
     data: {
+      environment: process.env.NODE_ENV || 'development',
       uptime: process.uptime(),
       time: new Date()
     }
@@ -55,6 +71,8 @@ app.use(errorHandler);
 // Launch configuration
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`[SERVER] Case Terminal Node online. Listening on port ${PORT}`);
-  console.log(`[STATUS] Secure channel running at http://localhost:${PORT}/api/health`);
+  const env = process.env.NODE_ENV || 'development';
+  console.log(`[SERVER] AI Advocate online (${env}) — port ${PORT}`);
+  console.log(`[HEALTH] http://localhost:${PORT}/api/health`);
 });
+

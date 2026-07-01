@@ -141,3 +141,129 @@ body {
   color: #02e600;
   font-weight: bold;
 }
+
+/* AI Markdown Response Styles */
+.ai-markdown-response p {
+  margin-bottom: 0.75em;
+  line-height: 1.7;
+}
+
+.ai-markdown-response p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-markdown-response strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.ai-markdown-response em {
+  color: #b9ccaf;
+  font-style: italic;
+}
+
+.ai-markdown-response h1,
+.ai-markdown-response h2,
+.ai-markdown-response h3,
+.ai-markdown-response h4 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.ai-markdown-response h1 { font-size: 1.25em; }
+.ai-markdown-response h2 { font-size: 1.125em; }
+.ai-markdown-response h3 { font-size: 1em; }
+
+.ai-markdown-response ul,
+.ai-markdown-response ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.ai-markdown-response ul {
+  list-style-type: disc;
+}
+
+.ai-markdown-response ol {
+  list-style-type: decimal;
+}
+
+.ai-markdown-response li {
+  margin-bottom: 0.35em;
+  line-height: 1.6;
+}
+
+.ai-markdown-response li::marker {
+  color: #00FF00;
+}
+
+.ai-markdown-response code {
+  background: rgba(255, 255, 255, 0.08);
+  color: #00FF00;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+
+.ai-markdown-response pre {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 0.75em 0;
+}
+
+.ai-markdown-response pre code {
+  background: none;
+  padding: 0;
+  color: #ececec;
+}
+
+.ai-markdown-response blockquote {
+  border-left: 3px solid #00FF00;
+  padding-left: 1em;
+  margin: 0.75em 0;
+  color: #b9ccaf;
+  font-style: italic;
+}
+
+.ai-markdown-response a {
+  color: #00FF00;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ai-markdown-response a:hover {
+  color: #66ff66;
+}
+
+.ai-markdown-response hr {
+  border: none;
+  border-top: 1px solid #2a2a2a;
+  margin: 1em 0;
+}
+
+.ai-markdown-response table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75em 0;
+}
+
+.ai-markdown-response th,
+.ai-markdown-response td {
+  border: 1px solid #2a2a2a;
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.ai-markdown-response th {
+  background: rgba(0, 255, 0, 0.05);
+  color: #ffffff;
+  font-weight: 600;
+}
+
