@@ -5,9 +5,16 @@ import mongoose from 'mongoose';
  * Emits robust logs to help trace database lifecycle in the legal terminal.
  */
 const connectDB = async () => {
+  if (!process.env.MONGO_URI) {
+    console.error("ERROR: MONGO_URI environment variable is missing.");
+    process.exit(1);
+  }
+
+  const maskedUri = process.env.MONGO_URI.substring(0, 30) + '...';
+  console.log(`[DATABASE] MONGO_URI prefix: ${maskedUri}`);
+
   try {
-    const connStr = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ai_advocate';
-    const conn = await mongoose.connect(connStr);
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`[DATABASE] MongoDB Connected: ${conn.connection.host}/${conn.connection.name}`);
   } catch (error) {
     console.error(`[DATABASE_ERROR] Connection failure: ${error.message}`);
