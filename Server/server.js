@@ -46,13 +46,8 @@ app.use(express.urlencoded({ extended: true }));
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Main Route Declarations
-app.use('/api/auth', authRoutes);
-app.use('/api/chat', chatRoutes);
-app.use('/api', uploadRoutes); // Mounts POST /api/upload and GET /api/documents
-app.use('/api/analyze', analyzeRoutes);
-
-// Root Welcome Healthcheck Endpoint
+// Public Healthcheck Endpoint — declared BEFORE any protected routes
+// so it is never intercepted by router-level auth middleware.
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -64,6 +59,12 @@ app.get('/api/health', (req, res) => {
     }
   });
 });
+
+// Main Route Declarations
+app.use('/api/auth', authRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api', uploadRoutes); // Mounts POST /api/upload and GET /api/documents
+app.use('/api/analyze', analyzeRoutes);
 
 // Centralized error handling filter
 app.use(errorHandler);
